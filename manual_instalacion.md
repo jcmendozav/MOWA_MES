@@ -27,8 +27,8 @@ sudo docker pull ubuntu:18.04
 ```
 ### Servidores
 ```
-sudo apt-get install openjdk8
-sudo apt-get install Tomcat8
+sudo apt-get install openjdk-8-jre-headless
+sudo apt-get install tomcat8
 sudo apt-get install Postgres10
 ```
 
