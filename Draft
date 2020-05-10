@@ -1,0 +1,82 @@
+#### tomcat8
+
+sudo mkdir /usr/share/tomcat8
+sudo groupadd tomcat
+sudo useradd -s /bin/false -g tomcat -d /usr/share/tomcat8 tomcat
+cd /tmp
+sudo tar xzvf apache-tomcat-8*tar.gz -C /usr/share/tomcat8 --strip-components=1
+cd /usr/share/tomcat8
+sudo chgrp -R tomcat /usr/share/tomcat8
+sudo chmod -R g+r conf
+sudo chmod g+x conf
+sudo chown -R tomcat webapps/ work/ temp/ logs/
+sudo chmod -R og+xr /usr/share/tomcat8
+
+# /usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+curl -v http://127.0.0.1:8080
+
+sudo nano /etc/systemd/system/tomcat.service
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
+Environment=CATALINA_PID=/usr/share/tomcat8/temp/tomcat.pid
+Environment=CATALINA_HOME=/usr/share/tomcat8
+Environment=CATALINA_BASE=/usr/share/tomcat8
+Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+ExecStart=/usr/share/tomcat8/bin/startup.sh
+ExecStop=/usr/share/tomcat8/bin/shutdown.sh
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+### postgres-10
+sudo apt-get install postgresql-10
+
+
+sudo -u postgres psql -c "SELECT * version();"
+   
+   su - postgres -c '/usr/lib/postgresql/10/bin/pg_ctl start \
+   "-D" "/var/lib/postgresql/10/main" \
+   "-o -c config_file=/etc/postgresql/10/main/postgresql.conf"'
+   
+   su - postgres -c '/usr/lib/postgresql/10/bin/pg_ctl stop \
+   "-D" "/var/lib/postgresql/10/main"'
+   
+   su - postgres -c '/usr/lib/postgresql/10/bin/pg_ctl status \
+   "-D" "/var/lib/postgresql/10/main"'
+   
+   
+   CREATE USER mesuser WITH PASSWORD 'mes.m0w4.2020';
+   CREATE DATABASE mesdb OWNER mesuser;
+	\c mesdb
+	
+	create user postgres with password 'cantarosa21_1';
+	   CREATE DATABASE SMSDB OWNER postgres;
+\password postgres cantarosa21_1
+
+
+psql -h smsdbserver -p 5432 -U postgres -d smsdb
+
+	### images
+	
+	
+	sudo docker commit e3d4c81eae5d mes_env/tomcat_postgres:v1
+	
+		sudo docker run -it --name mes_env_tomcat_postgres -d -p mes_env/tomcat_postgres:v1
+su - tomcat -c '/usr/share/tomcat8/bin/startup.sh'
+su - tomcat -c '/usr/share/tomcat8/bin/shutdown.sh'
