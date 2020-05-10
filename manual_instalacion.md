@@ -4,7 +4,7 @@ Message Enterprise Server
 # Prerequisitos
 
 ## Sistema Operativo
-* Ubuntu 18
+* Ubuntu 18.04
 
 ## Servidores y herramientas
 * Tomcat8
