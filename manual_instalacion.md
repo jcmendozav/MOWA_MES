@@ -72,14 +72,13 @@ smsdbserver 127.0.0.1
 * /home/ubuntu/mes/MESFilesloader.properties : Archivo externo a la aplicacion. Datos de conexion a base de datos __smsdbserver__.
 
 ### Aplicacion web (front y backend)
-* hibernate.cfg.xml: Archivo dentro de la aplicacion. Datos de conexion a base de datos __smsdbserver__.
-* Conexion.java: Archivo dentro de la aplicacion. Datos de conexion a base de datos __smsdbserver__. 
+* /home/ubuntu/mes/conf/main_mes_conf.properties : Datos de conexion a base de datos __smsdbserver__.
 
 ## Configuracion de cron tab
 * Programar **aplicacion de carga de datos** para ejecutarse periodicamente cada 9min. Ejemplo:
 ```
 sudo cron tab
-*/9 * * * * java -jar /home/ubuntu/mes/MESFilesloader.jar
+*/9 * * * * java -jar /home/ubuntu/mes/MESFilesLoader.jar
 ```
 
 
