@@ -16,6 +16,7 @@ Debido a que las fuentes no estan almacenadas como proyecto maven en git, no es 
 ### MES Aplicación web (front y backend): 
 * /var/lib/tomcat8/webapps/MES.war : empaquetado de la aplicación
 * /home/ubuntu/mes/conf/main_mes_conf.properties
+* /home/ubuntu/mes/images
 ### Aplicación de carga de datos
 * /home/ubuntu/mes/MESFilesloader.jar : ejecutable de la aplicación
 * /home/ubuntu/mes/lib/<librerias de __MESFilesloader__> : librerias
@@ -42,6 +43,7 @@ mkdir /home/ubuntu/mes/loader
 mkdir /home/ubuntu/mes/reports
 mkdir /home/ubuntu/mes/logs
 mkdir /home/ubuntu/mes/conf
+mkdir /home/ubuntu/mes/images
 export home_mes=/home/ubuntu/mes
 export home_mes_loader=$home_mes/loader
 export home_mes_reports=$home_mes/reports
