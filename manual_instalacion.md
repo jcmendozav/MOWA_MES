@@ -13,10 +13,15 @@ Message Enterprise Server
 
 ## Componentes. 
 Debido a que las fuentes no estan almacenadas como proyecto maven en git, no es posible descargar las fuentes desde git y construir los ejecutables con los comandos maven. Los siguientes componentes son provistos por el desarrollador:
-* MES Aplicacion web (front y backend): /var/lib/tomcat8/webapps/MES.war 
-* Pagina de inicio: /var/lib/tomcat8/webapps/ROOT/index.xml 
-* **Aplicacion de carga de datos** MESFilesloader: /home/ubuntu/mes/MESFilesloader.jar 
-* Librerias para **aplicacion de carga de datos**: /home/ubuntu/mes/lib/<librerias de __MESFilesloader__>
+### MES Aplicación web (front y backend): 
+* /var/lib/tomcat8/webapps/MES.war : empaquetado de la aplicación
+* /home/ubuntu/mes/conf/main_mes_conf.properties
+### Aplicación de carga de datos
+* /home/ubuntu/mes/MESFilesloader.jar : ejecutable de la aplicación
+* /home/ubuntu/mes/lib/<librerias de __MESFilesloader__> : librerias
+* /home/ubuntu/mes/MESfilesloader.properties 
+### Pagina de inicio
+* /var/lib/tomcat8/webapps/ROOT/index.xml 
 
 # Pasos a seguir
 ## Instalar los prerequisitos
@@ -36,6 +41,7 @@ mkdir /home/ubuntu/mes
 mkdir /home/ubuntu/mes/loader
 mkdir /home/ubuntu/mes/reports
 mkdir /home/ubuntu/mes/logs
+mkdir /home/ubuntu/mes/conf
 export home_mes=/home/ubuntu/mes
 export home_mes_loader=$home_mes/loader
 export home_mes_reports=$home_mes/reports
@@ -61,21 +67,21 @@ sudo dpkg-reconfigure tzdata
 
 ```
 ### Configuracion de dominios internos
-* Las aplicaciones estan apuntando a la base de datos __smsdbserver__. Este nombre debe tener su equivalente con la ip del servidor de base de datos. Ejemplo: 
+* Las Aplicaciónes estan apuntando a la base de datos __smsdbserver__. Este nombre debe tener su equivalente con la ip del servidor de base de datos. Ejemplo: 
 
 ```
 sudo echo "smsdbserver 127.0.0.1" >> /etc/hosts
 tail /etc/hosts
 smsdbserver 127.0.0.1
 ```
-### **Aplicacion de carga de datos**
-* /home/ubuntu/mes/MESFilesloader.properties : Archivo externo a la aplicacion. Datos de conexion a base de datos __smsdbserver__.
+### **Aplicación de carga de datos**
+* /home/ubuntu/mes/MESfilesloader.properties : Archivo externo a la Aplicación. Datos de conexion a base de datos __smsdbserver__.
 
-### Aplicacion web (front y backend)
+### Aplicación web (front y backend)
 * /home/ubuntu/mes/conf/main_mes_conf.properties : Datos de conexion a base de datos __smsdbserver__.
 
 ## Configuracion de cron tab
-* Programar **aplicacion de carga de datos** para ejecutarse periodicamente cada 9min. Ejemplo:
+* Programar **Aplicación de carga de datos** para ejecutarse periodicamente cada 9min. Ejemplo:
 ```
 sudo cron tab
 */9 * * * * java -jar /home/ubuntu/mes/MESFilesLoader.jar
